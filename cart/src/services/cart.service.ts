@@ -1,35 +1,46 @@
 import { Repository } from "typeorm"
 import { AddProductToCartDto } from "../dtos/add-product-to-cart.dto"
-import { CartProduct } from "../entities/cart-product.entity"
-import { Cart } from "../entities/cart.entity"
-import { AppDataSource } from '../repository/database'
+import { CartProduct } from "../entity/cart-product.entity"
+import { Cart } from "../entity/cart.entity"
+import { getAppDataSource } from '../data-source'
 
 export class CartService {
-  constructor (
-    private readonly cartRepository: Repository<Cart>,
-    private readonly cartProductRepository: Repository<CartProduct>
-  ) {
-    this.cartRepository = AppDataSource.getRepository(Cart)
-    this.cartProductRepository = AppDataSource.getRepository(CartProduct)
+
+  private cartRepository: Repository<Cart>
+  private cartProductRepository: Repository<CartProduct>
+
+  constructor () {
+    getAppDataSource()
+    .then(dataSource => {
+
+      this.cartRepository = dataSource.getRepository(Cart)
+      this.cartProductRepository = dataSource.getRepository(CartProduct)
+    })
   }
 
   createUserCart(userId: string) {
-    this.cartRepository.save({
+    return this.cartRepository.save({
       userId
     })
   }
-  
-  getUserCart(id: string) {
-    return this.cartRepository.findOne({
+
+  async getUserCart(id: string) {
+    let cart = await this.cartRepository.findOne({
       where: {
         userId: id
       }
     })
+
+    if (!cart) {
+      return this.createUserCart(id)
+    }
+
+    return cart
   }
 
   addProduct(addProductToCartDto: AddProductToCartDto) {
     const { quantity, productId, cartId } = addProductToCartDto
-    
+
     if (quantity > 0) {
 
       for (let i = 1; i <= quantity; ++i) {
