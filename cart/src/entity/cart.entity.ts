@@ -1,7 +1,8 @@
+import "reflect-metadata"
 import { Entity, PrimaryColumn, Column, OneToOne } from 'typeorm'
-import { User } from '../entities/user.entity'
+import { User } from './user.entity'
 
-@Entity('cart')
+@Entity()
 export class Cart {
   @PrimaryColumn({ generated: 'uuid' })
   id: string

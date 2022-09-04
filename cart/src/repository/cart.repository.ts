@@ -1,2 +1,0 @@
-import { AppDataSource } from './database'
-

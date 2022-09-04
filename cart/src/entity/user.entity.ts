@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm'
+import { Column, Entity, OneToOne, PrimaryColumn } from 'typeorm'
+import { Cart } from './cart.entity';
 
 @Entity('user')
 export class User  {
@@ -16,4 +17,8 @@ export class User  {
 
   @Column({ unique: true })
   cpf: string;
+
+  @Column()
+  @OneToOne(() => Cart, (cart) => cart.id)
+  cart: string;
 }
