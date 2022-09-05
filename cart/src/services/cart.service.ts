@@ -38,19 +38,19 @@ export class CartService {
     return cart
   }
 
-  addProduct(addProductToCartDto: AddProductToCartDto) {
-    const { quantity, productId, cartId } = addProductToCartDto
+  async addProduct(addProductToCartDto: AddProductToCartDto) {
+    let { quantity, productId, cartId } = addProductToCartDto
 
-    if (quantity > 0) {
+    quantity = 1 || quantity
 
-      for (let i = 1; i <= quantity; ++i) {
-        const newCartProduct = this.cartProductRepository.create({
-          cartId,
-          productId
-        })
+    for (let i = 1; i <= quantity; ++i) {
+      const newCartProduct = this.cartProductRepository.create({
+        cartId,
+        productId
+      })
 
-        this.cartProductRepository.save(newCartProduct)
-      }
+      await this.cartProductRepository.save(newCartProduct)
     }
   }
+
 }
