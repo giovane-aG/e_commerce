@@ -1,14 +1,14 @@
 import { Entity, PrimaryColumn, Column, OneToOne, ManyToOne, JoinColumn } from 'typeorm'
 import { Cart } from './cart.entity'
 
-@Entity('cart_product')
+@Entity()
 export class CartProduct {
   @PrimaryColumn({ generated: 'uuid' })
   id: string
 
   @Column()
-  @ManyToOne(() =>  Cart, (cart) => cart.id)
-  @JoinColumn()
+  @ManyToOne(() => Cart)
+  @JoinColumn({ name: 'id', referencedColumnName: 'id', foreignKeyConstraintName: 'fk_cart_id'})
   cartId: string
 
   @Column()
