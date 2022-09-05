@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
   username: "postgres",
   password: "postgres",
   database: "cart",
-  entities: [Cart, User],
+  entities: [Cart, User, CartProduct],
   synchronize: true,
   subscribers: [],
   migrations: [],
