@@ -6,7 +6,6 @@ const cartController = new CartController()
 
 const app = express()
 app.use(express.json())
-console.clear()
 
 app.get('/carts/:userId', async (request: Request, response: Response) => {
   const { userId } = request.params
@@ -22,6 +21,10 @@ app.post('/carts', async (request: Request, response: Response) => {
   } catch (error: any) {
     response.status(400).json({error})
   }
+})
+
+app.post('/carts/product', async (request: Request, response: Response) => {
+  return cartController.addProduct(request.body)
 })
 
 app.listen(5000, () => {
