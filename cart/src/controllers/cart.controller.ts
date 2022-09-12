@@ -1,3 +1,4 @@
+import { AddProductToCartDto } from '../dtos/add-product-to-cart.dto'
 import { CartService } from '../services/cart.service'
 
 export class CartController {
@@ -14,5 +15,9 @@ export class CartController {
 
   async createUserCart(userId: string) {
     return this.cartService.createUserCart(userId)
+  }
+
+  async addProduct(addProductToCartDto: AddProductToCartDto) {
+    return this.cartService.addProduct(addProductToCartDto)
   }
 }

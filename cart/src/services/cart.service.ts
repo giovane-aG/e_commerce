@@ -49,7 +49,7 @@ export class CartService {
         productId
       })
 
-      await this.cartProductRepository.save(newCartProduct)
+      return this.cartProductRepository.save(newCartProduct)
     }
   }
 

@@ -7,8 +7,6 @@ export class CartProduct {
   id: string
 
   @Column()
-  @ManyToOne(() => Cart)
-  @JoinColumn({ name: 'id', referencedColumnName: 'id', foreignKeyConstraintName: 'fk_cart_id'})
   cartId: string
 
   @Column()
