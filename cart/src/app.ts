@@ -13,6 +13,12 @@ app.get('/carts/:userId', async (request: Request, response: Response) => {
   response.status(200).json(cart)
 })
 
+app.get('/carts/:cartId/products', async (request: Request, response: Response) => {
+  const { cartId } = request.params
+  const cartProducts = await cartController.getCartProducts(cartId)
+  response.status(200).json(cartProducts)
+})
+
 app.post('/carts', async (request: Request, response: Response) => {
   try {
     const { userId } = request.body
