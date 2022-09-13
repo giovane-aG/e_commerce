@@ -53,4 +53,8 @@ export class CartService {
     }
   }
 
+  async getCartProducts(cartId: string): Promise<CartProduct[]> {
+    return this.cartProductRepository.find({ where: { cartId } })
+  }
+
 }
