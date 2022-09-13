@@ -24,7 +24,8 @@ app.post('/carts', async (request: Request, response: Response) => {
 })
 
 app.post('/carts/product', async (request: Request, response: Response) => {
-  return cartController.addProduct(request.body)
+  await cartController.addProduct(request.body)
+  response.status(201).json({ message: 'product added to cart' })
 })
 
 app.listen(5000, () => {
