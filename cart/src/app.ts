@@ -19,6 +19,14 @@ app.get('/carts/:cartId/products', async (request: Request, response: Response) 
   response.status(200).json(cartProducts)
 })
 
+app.delete('/carts/:cartId/products/:productId', async (request: Request, response: Response) => {
+  const { productId } = request.params
+  await cartController.deleteCartProduct(productId)
+  response.status(200).json({
+    message: "product removed from cart"
+  })
+})
+
 app.post('/carts', async (request: Request, response: Response) => {
   try {
     const { userId } = request.body
