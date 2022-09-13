@@ -25,4 +25,8 @@ export class CartController {
   async getCartProducts(cartId: string): Promise<CartProduct[]> {
     return this.cartService.getCartProducts(cartId)
   }
+
+  async deleteCartProduct(cartId: string): Promise<void> {
+    return this.cartService.deleteCartProduct(cartId)
+  }
 }
