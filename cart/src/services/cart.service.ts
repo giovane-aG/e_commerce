@@ -38,7 +38,7 @@ export class CartService {
     return cart
   }
 
-  async addProduct(addProductToCartDto: AddProductToCartDto) {
+  async addProduct(addProductToCartDto: AddProductToCartDto): Promise<void> {
     let { quantity, productId, cartId } = addProductToCartDto
 
     quantity = 1 || quantity
@@ -49,7 +49,7 @@ export class CartService {
         productId
       })
 
-      return this.cartProductRepository.save(newCartProduct)
+      await this.cartProductRepository.save(newCartProduct)
     }
   }
 

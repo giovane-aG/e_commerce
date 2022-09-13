@@ -17,7 +17,7 @@ export class CartController {
     return this.cartService.createUserCart(userId)
   }
 
-  async addProduct(addProductToCartDto: AddProductToCartDto) {
-    return this.cartService.addProduct(addProductToCartDto)
+  async addProduct(addProductToCartDto: AddProductToCartDto): Promise<void> {
+    this.cartService.addProduct(addProductToCartDto)
   }
 }
