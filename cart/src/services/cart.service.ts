@@ -57,4 +57,7 @@ export class CartService {
     return this.cartProductRepository.find({ where: { cartId } })
   }
 
+  async deleteCartProduct(cartId: string): Promise<void> {
+    this.cartProductRepository.delete({ id: cartId })
+  }
 }
