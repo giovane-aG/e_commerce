@@ -1,4 +1,5 @@
 import { AddProductToCartDto } from '../dtos/add-product-to-cart.dto'
+import { CartProduct } from '../entity/cart-product.entity'
 import { CartService } from '../services/cart.service'
 
 export class CartController {
@@ -19,5 +20,9 @@ export class CartController {
 
   async addProduct(addProductToCartDto: AddProductToCartDto): Promise<void> {
     this.cartService.addProduct(addProductToCartDto)
+  }
+
+  async getCartProducts(cartId: string): Promise<CartProduct[]> {
+    return this.cartService.getCartProducts(cartId)
   }
 }
