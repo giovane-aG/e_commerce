@@ -15,6 +15,33 @@ export class ProductService {
     })
   }
 
+  async getProducts(filters = null): Promise<Product[]> {
+    if (filters) {
+      return this.getProductsWithFilters(filters)
+    }
+
+    return this.getAllProducts()
+  }
+
+  async getAllProducts(): Promise<Product[]> {
+    return this.productRepository.find()
+  }
+
+  async getProductsWithFilters(filters: any): Promise<Product[]> {
+    const queryBuilder = this.productRepository.createQueryBuilder()
+    queryBuilder.select('*')
+
+    if (filters.name) {
+      queryBuilder.where('name like :name', { name: `%${filters.name}%` })
+    }
+
+    if (filters.code) {
+      queryBuilder.andWhere({ code: filters.code })
+    }
+
+    return queryBuilder.execute()
+  }
+
   async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
     let { name, code } = createProductDTO
     const newProduct: Product = this.productRepository.create({
