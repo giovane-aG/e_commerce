@@ -4,7 +4,7 @@ import { Product } from './entities/product.entity'
 const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
-  port: 5432,
+  port: 5002,
   username: "postgres",
   password: "postgres",
   database: "product",
