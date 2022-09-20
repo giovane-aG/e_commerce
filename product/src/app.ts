@@ -5,17 +5,36 @@ import { CreateProductDTO } from './dtos/create-product.dto'
 import { PatchProductDTO } from './dtos/patch-product.dto'
 
 const productController = new ProductController()
-
+console.clear()
 const app = express()
 app.use(express.json())
 
-app.post('/products', async (request: Request, response: Response) => {
-  let createProductDto: CreateProductDTO = request.body
-  return productController.createProduct(createProductDto)
+app.get('/products', async (request: Request, response: Response) => {
+  const query = request.query
+  const products = await productController.getProducts(query)
+
+  response.status(200).json({ products })
 })
 
-app.patch('/product/:id', async (request: Request, response: Response) => {
+app.post('/products', async (request: Request, response: Response) => {
+  let createProductDto: CreateProductDTO = request.body
+  await productController.createProduct(createProductDto)
+
+  response.status(201).json({
+    message: 'Product created'
+  })
+})
+
+app.patch('/products/:id', async (request: Request, response: Response) => {
   const patchProductDto: PatchProductDTO = request.body
   const id = request.params.id
-  return productController.patchProduct(id, patchProductDto)
+  await productController.patchProduct(id, patchProductDto)
+
+  response.status(200).json({
+    message: 'Product updated'
+  })
+})
+
+app.listen(6000, () => {
+  console.log('App listening on 6000')
 })
