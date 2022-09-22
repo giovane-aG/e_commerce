@@ -35,6 +35,13 @@ app.patch('/products/:id', async (request: Request, response: Response) => {
   })
 })
 
+app.delete('/products/:id', async (request: Request, response: Response) => {
+  const id = request.params.id
+  await productController.deleteProduct(id)
+
+  response.status(200).json({ message: 'Product deleted' })
+})
+
 app.listen(6000, () => {
   console.log('App listening on 6000')
 })
