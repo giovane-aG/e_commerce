@@ -56,7 +56,14 @@ export class ProductService {
     const result = await this.productRepository.update({ id }, patchProductDTO)
 
     if (!result.affected) {
-      throw new Error('No product with that id was found');
+      throw new Error('No product with that id was found')
+    }
+  }
+
+  async deleteProduct(id: string): Promise<void> {
+    const result = await this.productRepository.delete(id)
+    if (!result.affected) {
+      throw new Error('No product with that id was found')
     }
   }
 
