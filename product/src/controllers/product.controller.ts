@@ -21,4 +21,8 @@ export class ProductController {
   async patchProduct(id: string, patchProductDTO: PatchProductDTO): Promise<void> {
     this.productService.patchProduct(id, patchProductDTO)
   }
+
+  async deleteProduct(id: string): Promise<void> {
+    this.productService.deleteProduct(id)
+  }
 }
