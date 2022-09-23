@@ -37,9 +37,9 @@ app.patch('/products/:id', async (request: Request, response: Response) => {
 
 app.delete('/products/:id', async (request: Request, response: Response) => {
   const id = request.params.id
-  await productController.deleteProduct(id)
+  const result = await productController.deleteProduct(id)
 
-  response.status(200).json({ message: 'Product deleted' })
+  response.status(result.status).json(result.response)
 })
 
 app.listen(6000, () => {

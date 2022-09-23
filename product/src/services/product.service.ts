@@ -4,6 +4,8 @@ import { CreateProductDTO } from "../dtos/create-product.dto"
 import { PatchProductDTO } from "../dtos/patch-product.dto"
 import { Product } from "../entities/product.entity"
 
+import NotFoundError from "../helpers/errors/not-found-error"
+
 export class ProductService {
 
   private productRepository: Repository<Product>
@@ -62,8 +64,9 @@ export class ProductService {
 
   async deleteProduct(id: string): Promise<void> {
     const result = await this.productRepository.delete(id)
+
     if (!result.affected) {
-      throw new Error('No product with that id was found')
+      throw new NotFoundError('No product with that id was found')
     }
   }
 
