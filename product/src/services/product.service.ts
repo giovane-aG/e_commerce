@@ -58,7 +58,7 @@ export class ProductService {
     const result = await this.productRepository.update({ id }, patchProductDTO)
 
     if (!result.affected) {
-      throw new Error('No product with that id was found')
+      throw new NotFoundError('No product with that id was found')
     }
   }
 
