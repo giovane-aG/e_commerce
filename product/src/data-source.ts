@@ -3,8 +3,8 @@ import { Product } from './entities/product.entity'
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 5002,
+  host: "172.21.0.2",
+  port: 5432,
   username: "postgres",
   password: "postgres",
   database: "product",

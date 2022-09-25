@@ -40,6 +40,6 @@ app.delete('/products/:id', async (request: Request, response: Response) => {
   response.status(result.status).json(result.response)
 })
 
-app.listen(6000, () => {
+app.listen(5000, () => {
   console.log('App listening on 6000')
 })
