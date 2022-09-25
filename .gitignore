@@ -1,2 +1,3 @@
 repository/database.ts
 /node_modules
+product/dist
