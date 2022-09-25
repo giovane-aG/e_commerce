@@ -1,12 +1,15 @@
 FROM node
 
-COPY . /opt/cart
-WORKDIR /opt/cart
+COPY ./dist /opt/cart
 
 RUN apt-get update && apt-get install -y \
   git \
-  nano \
-  && npm i yarn \
+  nano
+
+WORKDIR /opt/cart
+
+RUN npm i yarn \
   && yarn install
 
-CMD ["yarn", "dev"]
+
+CMD ["node", "dist/app.js"]

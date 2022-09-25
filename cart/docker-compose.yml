@@ -1,24 +1,6 @@
 version: '3.2'
 services:
 
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: e_cart
-    restart: unless-stopped
-    tty: true
-    environment:
-      SERVICE_NAME: e_cart
-      SERVICE_TAGS: dev
-    working_dir: /opt/e_cart
-    ports:
-      - 5000:5000
-    volumes:
-      - ./:/opt/e_cart
-    networks:
-      - app-network
-
   #Postgres Service
   postgres:
     image: postgres:latest
@@ -28,8 +10,26 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
     ports:
-      - "5001:5432"
+      - "7001:5432"
       - "443:443"
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: e_cart
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: ecommerce_cart
+      SERVICE_TAGS: dev
+    working_dir: /opt/cart
+    ports:
+      - 7000:3000
+    volumes:
+      - ./:/opt/cart
     networks:
       - app-network
 

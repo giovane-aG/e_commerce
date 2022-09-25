@@ -5,8 +5,8 @@ import { User } from './entity/user.entity'
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 5001,
+  host: "172.22.0.2",
+  port: 5432,
   username: "postgres",
   password: "postgres",
   database: "cart",

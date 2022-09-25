@@ -42,8 +42,8 @@ app.post('/carts/product', async (request: Request, response: Response) => {
   response.status(201).json({ message: 'product added to cart' })
 })
 
-app.listen(5000, () => {
-  console.log('App listening on 5000')
+const PORT = 3000
+app.listen(PORT, () => {
+  console.log(`App listening on ${PORT}`)
 })
-
 
