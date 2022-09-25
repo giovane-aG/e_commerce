@@ -1,0 +1,37 @@
+version: '3.2'
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce_products
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: ecommerce_products
+      SERVICE_TAGS: dev
+    working_dir: /opt/product
+    ports:
+      - 5000:5000
+    networks:
+      - app-network
+
+  #Postgres Service
+  postgres:
+    image: postgres:latest
+    container_name: postgres_product
+    restart: unless-stopped
+    tty: true
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5001:5432"
+      - "443:443"
+    networks:
+      - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
