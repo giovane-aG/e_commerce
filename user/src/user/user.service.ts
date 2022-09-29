@@ -29,4 +29,11 @@ export class UserService {
     await this.usersRepository.save(newUser)
   }
 
+  async getUser(id: string): Promise<User> {
+    return this.usersRepository.findOne({ where: { id } })
+  }
+
+  async deleteUser(id: string): Promise<void> {
+    this.usersRepository.delete(id)
+  }
 }
